@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ttb-label-verifier
+    runtime: node
+    plan: free
+    # If this repo's root is the "solution" folder, rootDir can be omitted.
+    # If you push the whole take-home repo, set: rootDir: solution
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.1
+      # OCR engine: "tesseract" (offline, heavier) or "ocrspace" (cloud, lighter).
+      # For the free tier we recommend the cloud engine to stay within memory limits.
+      - key: OCR_ENGINE
+        value: ocrspace
+      # Required when OCR_ENGINE=ocrspace. Set this in the Render dashboard, not here.
+      - key: OCR_API_KEY
+        sync: false

@@ -1,0 +1,18 @@
+{
+  "name": "ttb-label-verifier",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered TTB alcohol label verification prototype (frontend + backend)",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "copy:client": "node scripts/copy-client.js",
+    "build": "npm run install:all && npm run build:frontend && npm run build:backend && npm run copy:client",
+    "start": "npm --prefix backend start",
+    "test": "npm --prefix backend test"
+  },
+  "engines": {
+    "node": ">=18.12.0"
+  }
+}

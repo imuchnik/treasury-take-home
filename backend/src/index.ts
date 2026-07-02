@@ -114,6 +114,20 @@ app.post('/api/verify-batch', upload.array('labels', 300), async (req, res) => {
   return res.json({ success: true, items });
 });
 
+/**
+ * In production the built frontend is copied to backend/public. Serve it so the
+ * whole app (UI + API) runs from a single URL/host. Any non-API route falls
+ * back to index.html so client-side routing works.
+ */
+const CLIENT_DIR = path.join(__dirname, '..', 'public');
+if (fs.existsSync(path.join(CLIENT_DIR, 'index.html'))) {
+  app.use(express.static(CLIENT_DIR));
+  app.get(/^(?!\/api).*/, (_req, res) => {
+    res.sendFile(path.join(CLIENT_DIR, 'index.html'));
+  });
+  console.log(`Serving frontend from ${CLIENT_DIR}`);
+}
+
 app.listen(PORT, async () => {
   console.log(`Label verifier backend listening on http://localhost:${PORT}`);
   console.log(`OCR engine: ${engineName()}`);

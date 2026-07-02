@@ -120,6 +120,43 @@ npm test
 
 ---
 
+## Deployment (single URL)
+
+For a shareable prototype, the app deploys as **one service**: the Express
+backend serves both the API (`/api/*`) and the compiled React UI (everything
+else). This gives reviewers a single clickable URL.
+
+### Combined production build (run from `solution/`)
+
+```bash
+npm run build     # installs deps, builds frontend + backend, copies UI into backend/public
+npm start         # serves UI + API on $PORT (default 3001)
+```
+
+Then open `http://localhost:3001`.
+
+### Deploy to Render (recommended)
+
+A `render.yaml` blueprint is included. Steps:
+
+1. Push this repo to GitHub.
+2. In Render → **New → Blueprint**, point it at the repo.
+   - If you push only the `solution/` folder as the repo root, the blueprint
+     works as-is. If you push the whole take-home repo, set `rootDir: solution`
+     in `render.yaml`.
+3. Render runs `npm run build` then `npm start`. Health check: `/api/health`.
+4. **OCR on the free tier:** offline Tesseract is memory-heavy for 512 MB
+   instances, so the blueprint defaults to the lighter cloud engine
+   (`OCR_ENGINE=ocrspace`). Add a free `OCR_API_KEY` from
+   [ocr.space/ocrapi](https://ocr.space/ocrapi) in the Render dashboard
+   (marked `sync: false` so it isn't committed). To use offline OCR instead,
+   set `OCR_ENGINE=tesseract` and choose an instance with more memory.
+
+The same build/start commands work on any Node host (Railway, Fly.io, Azure App
+Service, etc.).
+
+---
+
 ## API
 
 - `GET /api/health` → `{ status, ocrEngine }`

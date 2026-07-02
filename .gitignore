@@ -3,6 +3,7 @@
 
 # Build output
 backend/dist/
+backend/public/
 frontend/build/
 
 # Runtime / uploads
