@@ -1,0 +1,9 @@
+**/node_modules
+backend/dist
+backend/public
+backend/uploads
+frontend/build
+**/*.log
+**/*.traineddata
+.git
+.env

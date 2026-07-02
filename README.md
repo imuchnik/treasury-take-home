@@ -7,6 +7,10 @@ expected fields, uploads the label photo, and gets a clear, field-by-field
 
 This directory (`solution/`) is a self-contained implementation.
 
+**Live demo:** https://ttb-label-verifier.fly.dev/
+(Sample labels to test with are in [`samples/`](samples/). The first request after
+idle may take a few seconds while the machine wakes up.)
+
 ---
 
 ## What it checks
