@@ -1,0 +1,9 @@
+{
+  "short_name": "TTB Verifier",
+  "name": "TTB Alcohol Label Verification",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0b3d63",
+  "background_color": "#ffffff"
+}
